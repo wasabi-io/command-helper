@@ -1,0 +1,7 @@
+--require ts-node/register
+--timeout 5000
+-R spec
+--ui bdd
+--watch-extensions tsx,ts
+--recursive
+__test__/**/*.spec.ts
