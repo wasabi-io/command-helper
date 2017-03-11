@@ -1,8 +1,9 @@
 {
   "name": "command-helper",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "lib/index.js",
+  "types": "./lib/index.d.ts",
   "scripts": {
     "start": "ts-node tools/dev/start.ts",
     "test": "mocha --opts mocha.opts",
@@ -17,7 +18,6 @@
     "@types/node": "^7.0.5",
     "chai": "^3.5.0",
     "mocha": "^3.2.0",
-    "prompt": "^1.0.0",
     "ts-node": "^2.1.0",
     "typescript": "^2.2.1"
   },
