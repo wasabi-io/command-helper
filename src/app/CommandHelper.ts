@@ -4,13 +4,12 @@ import Strings from "../util/Strings";
 import StandartReaders from "./StandartReaders";
 import Arrays from "../util/Arrays";
 import {
-    CommandHelperTemplate,
     CommandHelperProps,
     ParseResult,
     CommandState,
-    CommandReaders, CommandReader
+    CommandReader
 } from "./CommandHelperApi";
-import {CommandHelperTable} from "./CommandHelperTable";
+import CommandHelperTable from "./CommandHelperTable";
 
 export default class CommandHelper extends PropsClass<CommandHelperProps> {
     static defaultProps: CommandHelperProps = {

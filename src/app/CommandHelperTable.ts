@@ -1,5 +1,4 @@
 import {
-    CommandReaders,
     CommandHelperTemplate,
     ParseResult,
     CommandHelperProps
@@ -7,7 +6,7 @@ import {
 import * as merge from "deepmerge";
 import {hasValue} from "../util/Functions";
 
-export class CommandHelperTable {
+export default class CommandHelperTable {
     private props: CommandHelperProps;
     constructor(props: CommandHelperProps){
         props.template = CommandHelperTable.initTemplate(props.template);

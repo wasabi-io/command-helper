@@ -109,7 +109,7 @@ export default class Strings {
      * @param length
      * @return {string}
      */
-    static rPad = function(value: string, padString, length) {
+    static rPad (value: string, padString, length) {
         if (!Strings.has(value)) value = "";
         while (value.length < length)
             value = value + padString;
