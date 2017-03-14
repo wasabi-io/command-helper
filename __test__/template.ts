@@ -1,7 +1,7 @@
 const packageJson = require("../package.json");
 let template = {
-  name: packageJson.name,
-  version: packageJson.version,
+  name: "application",
+  version: "v1.0",
   options: {
     "--renderer": {
       "type": "boolean",

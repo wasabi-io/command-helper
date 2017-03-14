@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": "../",
     "paths": {
       "*": [
         "./src/*"
@@ -20,8 +20,6 @@
     "outDir": "./lib"
   },
   "exclude": [
-    "__test__",
-    "lib",
     "tools",
     "./node_modules/**/*"
   ]

@@ -1,23 +1,23 @@
+import { has, Objects } from "wasabi-common";
 import {
-    CommandHelperTemplate,
+    HelperTemplate,
     ParseResult,
-    CommandHelperProps
-} from "./CommandHelperApi";
-import * as merge from "deepmerge";
-import {hasValue} from "../util/Functions";
+    HelperProps
+} from "./HelperApi";
 
-export default class CommandHelperTable {
-    private props: CommandHelperProps;
-    constructor(props: CommandHelperProps){
-        props.template = CommandHelperTable.initTemplate(props.template);
+
+export default class HelperBoard {
+    private props: HelperProps;
+    public constructor(props: HelperProps){
+        props.template = HelperBoard.initTemplate(props.template);
         this.props = props;
     }
 
     help(parseResult: ParseResult){
-        CommandHelperTable.help(this.props, parseResult);
+        HelperBoard.help(this.props, parseResult);
     }
 
-    private static help(props: CommandHelperProps, result: ParseResult) {
+    private static help(props: HelperProps, result: ParseResult) {
         const Table = require("cli-table");
         let table = new Table({
             colWidths: [20, 40, 20, 20, 20, 40],
@@ -66,10 +66,10 @@ export default class CommandHelperTable {
                     row.push(aliases[0] + " value1, [value2, ...]");
                     break;
             }
-            row.push(hasValue(option.type)? option.type.toString(): "");
-            row.push(hasValue(option.default)? option.default.toString(): "");
-            row.push(hasValue(option.infinity)? option.infinity.toString(): "");
-            row.push(hasValue(option.description)? option.description: "");
+            row.push(has(option.type)? option.type.toString(): "");
+            row.push(has(option.default)? option.default.toString(): "");
+            row.push(has(option.infinity)? option.infinity.toString(): "");
+            row.push(has(option.description)? option.description: "");
             table.push(row);
         }
         console.log(table.toString());
@@ -77,8 +77,8 @@ export default class CommandHelperTable {
 
 
 
-    private static initTemplate(template: CommandHelperTemplate): CommandHelperTemplate{
-        let newTemplate: CommandHelperTemplate = merge({} as any, template);
+    private static initTemplate(template: HelperTemplate): HelperTemplate{
+        let newTemplate: HelperTemplate = Objects.clone(template);
         for(let key in newTemplate.options) {
             if(!newTemplate.options.hasOwnProperty(key)) continue;
             let alias = newTemplate.options[key];

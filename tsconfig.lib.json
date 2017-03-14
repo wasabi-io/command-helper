@@ -1,17 +1,17 @@
 {
   "compilerOptions": {
     "baseUrl": "./",
-    "target": "es5",
     "paths": {
       "*": [
         "./src/*"
       ]
     },
+    "target": "es5",
     "module": "commonjs",
     "declaration": true,
     "noImplicitAny": false,
-    "sourceMap": true,
     "preserveConstEnums": true,
+    "sourceMap": true,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -21,6 +21,7 @@
   },
   "exclude": [
     "__test__",
+    "lib",
     "tools",
     "./node_modules/**/*"
   ]

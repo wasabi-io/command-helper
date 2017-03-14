@@ -1,7 +1,9 @@
-import CommandHelper from "../../src/index";
+import { addModule } from "wasabi-common/lib/util/Resolver";
+addModule("src");
+import Helper from "app/Helper";
 import template from "./template";
 
-let helper = new CommandHelper({
+let helper = new Helper({
     template
 });
 

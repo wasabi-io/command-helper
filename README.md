@@ -1,5 +1,9 @@
 ## command-helper
 
+[![npm package](https://badge.fury.io/gh/kbukum%2Fwasabi-common.svg)](https://badge.fury.io/gh/kbukum%2Fwasabi-common.svg)
+[![Build Status](https://travis-ci.org/kbukum/command-helper.svg?branch=master)](https://travis-ci.org/kbukum/command-helper)
+[![codecov](https://codecov.io/gh/kbukum/command-helper/branch/master/graph/badge.svg)](https://codecov.io/gh/kbukum/command-helper)
+
 ### Motivation
 
 * Command Helper is used to get result from the given commands and provides to remove current command from the given command array if needed.
@@ -18,7 +22,6 @@ export interface CommandHelperProps {
     readers?: CommandReaders // command readers
 }
 ```
-
 
 * <a name="CommandReaders"></a>Command Readers : Holds readers to read commands by the command type.
     - key {string} : [CommandReader](#CommandReader)

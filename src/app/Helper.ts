@@ -1,26 +1,23 @@
-import PropsClass from "../util/PropClass";
-import {hasValue} from "../util/Functions";
-import Strings from "../util/Strings";
-import StandartReaders from "./StandartReaders";
-import Arrays from "../util/Arrays";
+import { has, PropClass, Strings, Arrays } from "wasabi-common";
+import StandardReaders from "./StandardReaders";
 import {
-    CommandHelperProps,
+    HelperProps,
     ParseResult,
     CommandState,
     CommandReader
-} from "./CommandHelperApi";
-import CommandHelperTable from "./CommandHelperTable";
+} from "./HelperApi";
+import HelperBoard from "./HelperBoard";
 
-export default class CommandHelper extends PropsClass<CommandHelperProps> {
-    static defaultProps: CommandHelperProps = {
+export default class Helper extends PropClass {
+    static defaultProps: HelperProps = {
         template: {
             name: null,
             version: null,
             options: {}
         },
-        readers: StandartReaders
+        readers: StandardReaders
     };
-    public constructor(props: CommandHelperProps) {
+    public constructor(props: HelperProps) {
         super(props);
     }
     public parse(argv: string[], reader?: CommandReader, onHelp?): ParseResult {
@@ -30,14 +27,14 @@ export default class CommandHelper extends PropsClass<CommandHelperProps> {
             if(Arrays.has(argv) && argv.indexOf("--help") != -1) {
                 isHelpCommand = true;
             }
-            result = CommandHelper.parse(argv, this.props, reader);
+            result = Helper.parse(argv, this.props, reader);
         } catch (e) {
             if(!isHelpCommand) {
                 throw e;
             }
         }
         if(isHelpCommand) {
-            let helper = new CommandHelperTable(this.props);
+            let helper = new HelperBoard(this.props);
             helper.help(result);
             if(onHelp) {
                 onHelp()
@@ -51,10 +48,11 @@ export default class CommandHelper extends PropsClass<CommandHelperProps> {
     /**
      *
      * @param argv {string[]}
-     * @param props {CommandHelperProps}
+     * @param props {HelperProps}
+     * @param globalReader? { CommandReader }
      * @return {ParseResult}
      */
-    public static parse(argv: string[], props: CommandHelperProps, globalReader?: CommandReader): ParseResult {
+    public static parse(argv: string[], props: HelperProps, globalReader?: CommandReader): ParseResult {
         let hasArgs = Arrays.has(argv);
         let result = {
             options: {},
@@ -63,7 +61,7 @@ export default class CommandHelper extends PropsClass<CommandHelperProps> {
             defaults: {}
         };
         if(!hasArgs) return result;
-        let i = hasValue(props.start) ? props.start : 0;
+        let i = has(props.start) ? props.start : 0;
         let commandState: CommandState = {
             command: null,
             template: null,
@@ -84,18 +82,18 @@ export default class CommandHelper extends PropsClass<CommandHelperProps> {
                     arg = arg.substring(0, equalIndex);
                 }
                 let commandTemplate = props.template.options[arg];
-                if (!hasValue(commandTemplate)) continue; // it's not defined command
+                if (!has(commandTemplate)) continue; // it's not defined command
 
                 let command;
                 if (typeof commandTemplate === "string") { // it's command alias
                     command = commandTemplate;
                     commandTemplate = props.template.options[commandTemplate as any];
-                    if (!hasValue(commandTemplate)) continue; // alias is not found
+                    if (!has(commandTemplate)) continue; // alias is not found
                 } else {
                     command = arg;
                 }
-                let commandName = commandTemplate.name || CommandHelper.convertKey(command);
-                if (!hasValue(result.options[commandName]) || commandTemplate.infinity) {
+                let commandName = commandTemplate.name || Helper.convertKey(command);
+                if (!has(result.options[commandName]) || commandTemplate.infinity) {
                     let reader = props.readers[commandTemplate.type] || globalReader;
                     if (reader === null) {
                         throw new Error("Unknown Reader ! ");
@@ -121,15 +119,15 @@ export default class CommandHelper extends PropsClass<CommandHelperProps> {
                 }
             }
         }
-        Arrays.cleanValueFromArray(argv, undefined);
+        Arrays.removeValue(argv, undefined);
         let template = props.template;
         if(result) {
             for (let key in template.options) {
                 if (!template.options.hasOwnProperty(key) ) continue;
                 let commandTemplate = template.options[key];
                 if(typeof commandTemplate === "string") continue;
-                let commandName = commandTemplate.name || CommandHelper.convertKey(key);
-                if (hasValue(result.options[commandName])) continue;
+                let commandName = commandTemplate.name || Helper.convertKey(key);
+                if (has(result.options[commandName])) continue;
                 result.options[commandName] = commandTemplate.default;
                 result.defaults[commandName] = true;
             }

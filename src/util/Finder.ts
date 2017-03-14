@@ -1,8 +1,14 @@
-import Strings from "../util/Strings";
-import {CommandState} from "../app/CommandHelperApi";
+import { Strings } from "wasabi-common"
+
+export interface FinderState {
+    argv: string[],
+    part2?: string,
+    lastIndex: number,
+    [key: string]: any
+}
 
 export default class Finder {
-    static getOne(state: CommandState): string {
+    static getOne(state: FinderState): string {
         if(Strings.has(state.part2)) {
             return state.part2;
         }
@@ -16,7 +22,7 @@ export default class Finder {
         state.lastIndex--;
     }
 
-    static getList(state: CommandState): string[] {
+    static getList(state: FinderState): string[] {
         if(state.argv.length - 1 > state.lastIndex) {
             let values = [];
             do {

@@ -13,17 +13,16 @@ export interface CommandTemplate {
     type: string
     default?: string
     remove?: boolean
-    usage: 0 | 1 | -1
+    usage: number
     infinity?: boolean
 }
-
 
 export interface CommandState {
     command: string,
     template: CommandTemplate,
     argv: string[],
     lastIndex: number,
-    part2: string
+    part2?: string
 }
 
 export interface CommandReader {
@@ -34,7 +33,7 @@ export interface CommandReaders {
     [key: string]: CommandReader
 }
 
-export interface CommandHelperTemplate {
+export interface HelperTemplate {
     name: string,
     version: string,
     options : {
@@ -42,8 +41,8 @@ export interface CommandHelperTemplate {
     }
 }
 
-export interface CommandHelperProps {
+export interface HelperProps {
     start?: number,
-    template?: CommandHelperTemplate,
+    template: HelperTemplate,
     readers?: CommandReaders
 }

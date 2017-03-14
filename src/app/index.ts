@@ -1,5 +1,5 @@
-export * from "./CommandHelperApi";
-export { default as StandartReaders } from "./StandartReaders";
-export { default as CommandHelperTable } from "./CommandHelperTable";
-export { default as CommandHelper } from "./CommandHelper";
+export * from "./HelperApi";
+export { default as StandardReaders } from "./StandardReaders";
+export { default as CommandHelperTable } from "./HelperBoard";
+export { default as CommandHelper } from "./Helper";
 
