@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Wasabi-Common</title>
+	<title>command-helper</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">Wasabi-Common</a>
+					<a href="index.html" class="title">command-helper</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -56,7 +56,7 @@
 					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1> Wasabi-Common</h1>
+			<h1> command-helper</h1>
 		</div>
 	</div>
 </header>
@@ -68,209 +68,214 @@
 				<p><a href="https://badge.fury.io/gh/kbukum%2Fwasabi-common.svg"><img src="https://badge.fury.io/gh/kbukum%2Fwasabi-common.svg" alt="npm package"></a>
 					<a href="https://travis-ci.org/kbukum/command-helper"><img src="https://travis-ci.org/kbukum/command-helper.svg?branch=master" alt="Build Status"></a>
 				<a href="https://codecov.io/gh/kbukum/command-helper"><img src="https://codecov.io/gh/kbukum/command-helper/branch/master/graph/badge.svg" alt="codecov"></a></p>
-				<h3 id="motivation">Motivation</h3>
+				<h4 id="motivation">Motivation</h4>
 				<ul>
 					<li>Command Helper is used to get result from the given commands and provides to remove current command from the given command array if needed.</li>
 					<li>You can use standart readers (boolean, string, array ) to read command and also you can define custom readers to read commands.</li>
 				</ul>
+				<h4 id="-type-docs-https-wasabi-io-github-io-command-helper-"><a href="https://wasabi-io.github.io/command-helper">Type Docs</a></h4>
 				<h4 id="template-format">Template Format</h4>
+				<h4 id="-a-name-main-template-a-main-template"><a name="Main Template"></a>Main Template</h4>
 				<ul>
-					<li><a name="CommandHelperProps"></a>CommandHelperProps<ul>
-							<li>start? {number} : read command by start index from the given command array</li>
-							<li>template?: <a href="#CommandHelperTemplate">CommandHelperTemplate</a>,</li>
-							<li>readers?: <a href="#CommandReaders">CommandReaders</a> </li>
-						</ul>
-					</li>
+					<li>name : name of your bin js file.</li>
+					<li>version: version of your library.</li>
+					<li>commands: command reference to find your command template.</li>
+					<li>options: holds each command template options.</li>
 				</ul>
-				<pre><code class="lang-typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> CommandHelperProps {
-    start?: <span class="hljs-built_in">number</span>, <span class="hljs-comment">// define command start index</span>
-    template?: CommandHelperTemplate,  <span class="hljs-comment">// command template</span>
-    readers?: CommandReaders <span class="hljs-comment">// command readers</span>
-}
-</code></pre>
-				<ul>
-					<li><a name="CommandReaders"></a>Command Readers : Holds readers to read commands by the command type.<ul>
-							<li>key {string} : <a href="#CommandReader">CommandReader</a></li>
-						</ul>
-					</li>
-				</ul>
-				<pre><code class="lang-typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> CommandReaders {
-    [key: <span class="hljs-built_in">string</span>]: CommandReader
-}
-</code></pre>
-				<ul>
-					<li><a name="CommandReader"></a>Command Reader: Provides to read command. <ul>
-							<li>(name {string}, state {<a href="#CommandState">CommandState</a>} , options {key {string}: any}) =&gt; {any}</li>
-						</ul>
-					</li>
-				</ul>
-				<pre><code class="lang-typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> CommandReader {
-    (name: <span class="hljs-built_in">string</span>, state: CommandState, options: {[key: <span class="hljs-built_in">string</span>]: <span class="hljs-built_in">any</span>}): <span class="hljs-built_in">any</span>
-}
-</code></pre>
-				<ul>
-					<li><a name="CommandHelperTemplate"></a>Command Helper Template <ul>
-							<li>name: string,</li>
-							<li>version: string,</li>
-							<li>options {key {string}: alias or <a href="#CommandTemplate">CommandTemplate</a> }</li>
-						</ul>
-					</li>
-				</ul>
-				<pre><code class="lang-typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> CommandHelperTemplate {
-    name: <span class="hljs-built_in">string</span>,
-    version: <span class="hljs-built_in">string</span>,
-    options : {
-        [key: <span class="hljs-built_in">string</span>]: <span class="hljs-built_in">any</span>
-    }
-}
-</code></pre>
-				<ul>
-					<li><a name="CommandTemplate"></a>Command Template <ul>
-							<li>type: string</li>
-							<li>default?: string</li>
-							<li>remove?: boolean</li>
-							<li>infinity?: boolean</li>
-						</ul>
-					</li>
-				</ul>
-				<pre><code class="lang-typescript"><span class="hljs-comment">// Command Template</span>
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> CommandTemplate {
-    <span class="hljs-keyword">type</span>: <span class="hljs-built_in">string</span>
-    <span class="hljs-keyword">default</span>?: <span class="hljs-built_in">string</span>
-    remove?: <span class="hljs-built_in">boolean</span>
-    infinity?: <span class="hljs-built_in">boolean</span>
-}
-</code></pre>
-				<ul>
-					<li><a name="CommandState"></a>Command State <ul>
-							<li>command: string,</li>
-							<li>template: CommandTemplate,</li>
-							<li>argv: string[],</li>
-							<li>lastIndex: number,</li>
-							<li>part2: string</li>
-						</ul>
-					</li>
-				</ul>
-				<pre><code class="lang-typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> CommandState {
-    command: <span class="hljs-built_in">string</span>,
-    template: CommandTemplate,
-    argv: <span class="hljs-built_in">string</span>[],
-    lastIndex: <span class="hljs-built_in">number</span>,
-    part2: <span class="hljs-built_in">string</span>
-}
-</code></pre>
-				<ul>
-					<li><a name="ParseResult"></a>Parse Result<ul>
-							<li>options: { key {string}: value {any} }</li>
-							<li>rawArgs: string[]</li>
-							<li>otherArgs: string[]</li>
-							<li>defaults: { key {string}: {boolean} }</li>
-						</ul>
-					</li>
-				</ul>
-				<pre><code class="lang-typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> ParseResult {
-    options: {
-        [key: <span class="hljs-built_in">string</span>]: <span class="hljs-built_in">any</span>
-    }
-    rawArgs: <span class="hljs-built_in">string</span>[]
-    otherArgs: <span class="hljs-built_in">string</span>[]
-    defaults: {
-        [key: <span class="hljs-built_in">string</span>]: <span class="hljs-built_in">boolean</span>
-    }
-}
-</code></pre>
-				<ul>
-					<li><p>Flags: </p>
-						<ul>
-							<li>type</li>
-							<li>default</li>
-							<li>infinity</li>
-							<li>description</li>
-							<li>remove </li>
-						</ul>
-					</li>
-					<li><p>Standart Readers</p>
-						<ul>
-							<li>boolean</li>
-							<li>string</li>
-							<li>array</li>
-						</ul>
-					</li>
-					<li><p>Add Custom Reader</p>
-					</li>
-					<li><p>Use callback to parse command</p>
-					</li>
-				</ul>
-				<h4 id="example-template">Example Template</h4>
-				<ul>
-					<li>Template Parameter
-						```typescript
-						let template = {
-						name: &quot;application&quot;,
-						version: &quot;v1.0&quot;,
-						options: {
-						&quot;--renderer&quot;: {<pre><code><span class="hljs-string">"type"</span>: <span class="hljs-string">"boolean"</span>,
-<span class="hljs-string">"usage"</span>: <span class="hljs-number">0</span>,
-<span class="hljs-string">"default"</span>: <span class="hljs-literal">false</span>,
-<span class="hljs-string">"description"</span>: <span class="hljs-string">"show view on ui"</span>
-</code></pre>  },
-						&quot;--interactive&quot;: {<pre><code><span class="hljs-string">"type"</span>: <span class="hljs-string">"boolean"</span>,
-<span class="hljs-string">"usage"</span>: <span class="hljs-number">0</span>,
-<span class="hljs-string">"default"</span>: <span class="hljs-literal">false</span>,
-<span class="hljs-string">"description"</span>: <span class="hljs-string">"show view in watch mode"</span>
-</code></pre>  },
-						&quot;--root-list&quot;: {<pre><code><span class="hljs-string">"type"</span>: <span class="hljs-string">"array"</span>,
-<span class="hljs-string">"default"</span>: <span class="hljs-string">[]</span>,
-<span class="hljs-string">"usage"</span>: -<span class="hljs-number">1</span>,
-<span class="hljs-string">"infinity"</span>: true,
-<span class="hljs-string">"description"</span>: <span class="hljs-string">"provides to resolve file in root folders"</span>
-</code></pre>  },
-						&quot;--debug-brk&quot;: {<pre><code><span class="hljs-string">"type"</span>: <span class="hljs-string">"boolean"</span>,
-<span class="hljs-string">"default"</span>: <span class="hljs-literal">false</span>,
-<span class="hljs-string">"usage"</span>: <span class="hljs-number">0</span>,
-<span class="hljs-string">"remove"</span>: <span class="hljs-literal">true</span>,
-<span class="hljs-string">"description"</span>: <span class="hljs-string">"run program in debug mode"</span>
-</code></pre>  }
-						}
-					};</li>
-				</ul>
-				<p>let helper = new CommandHelper(template);</p>
-				<pre><code>
-* Given Array
-```javascript
-helper.parse([<span class="hljs-string">'--renderer'</span>, <span class="hljs-string">'--another_command'</span>, <span class="hljs-string">'--debug-brk'</span>])
-</code></pre><ul>
-					<li><p>parse result</p>
-						<pre><code class="lang-javascript">{
-  <span class="hljs-attr">options</span>: {
-      <span class="hljs-attr">renderer</span>: <span class="hljs-literal">true</span>,
-      <span class="hljs-attr">debugBrk</span>: <span class="hljs-literal">true</span>,
-      <span class="hljs-attr">interactive</span>: <span class="hljs-literal">false</span>,
-      <span class="hljs-attr">rootList</span>: []
+				<pre><code class="lang-json">{
+  &quot;name&quot;: &quot;command-helper&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;commands&quot;: {
+    ...
   },
-  <span class="hljs-attr">rawArgs</span>: [<span class="hljs-string">'--renderer'</span>, <span class="hljs-string">'--another_command'</span>, <span class="hljs-string">'--debug-brk'</span>],
-  <span class="hljs-attr">otherArgs</span>: [<span class="hljs-string">'--another_command'</span>],
-  <span class="hljs-attr">defaults</span>: {<span class="hljs-attr">interactive</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">rootList</span>: <span class="hljs-literal">true</span>}
+  &quot;options&quot;: {
+    ...
+  }
 }
 </code></pre>
+				<h4 id="-a-name-command-template-a-command-template"><a name="Command Template"></a>Command Template</h4>
+				<ul>
+					<li><p>Main Template -&gt; options[key]: Define command template in ${Main Template}.options{variable name}</p>
+						<ul>
+							<li>reader: Reader is read command and find value of command in the given arguments.<ul>
+									<li>name: Its shown on help board.</li>
+									<li>main: it is reader function to read the command and find its values. </li>
+									<li>related: called by main reader if exist. </li>
+								</ul>
+							</li>
+							<li>defaultValue: it is default value for the command.</li>
+							<li>remove: Indicates if the command read in the given arguments then remove all things about the command from the given arguments.</li>
+							<li>infinity: read command recursively from the given arguments.</li>
+							<li>description: Its shown on help board.</li>
+							<li>usage:  Its used on help board.<ul>
+									<li>usage = 0 then --command</li>
+									<li>usage = 1 then --command value</li>
+									<li>usage = -1 then --files value1, [value2, ...]</li>
+									<li>else shows usage if exist.</li>
+								</ul>
+							</li>
+						</ul>
 					</li>
-					<li><p>Help Example</p>
+					<li><p>Short Template: It used when the template file keeps as json. </p>
 					</li>
 				</ul>
-				<pre><code class="lang-javascript">helper.parse([<span class="hljs-string">'--help'</span>])
+				<pre><code class="lang-json">{
+    <span class="hljs-attr">"reader"</span>: <span class="hljs-string">"Boolean"</span>,
+    <span class="hljs-attr">"defaultValue"</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">"description"</span>: <span class="hljs-string">"Renderer Description"</span>,
+    <span class="hljs-attr">"usage"</span>: <span class="hljs-number">0</span>
+}
 </code></pre>
 				<ul>
-					<li><p>Help Result
-							```
-						Usage: command-helper [options]</p>
-						<p>Options: </p>
-						<h1 id="-command-usage-type-default-infinity-description-">  Command              Usage                                    Type                 Default              Infinity             Description                         </h1>
-						<p>  --renderer           --renderer                               boolean              false                                     show view on ui<br>  --interactive        --interactive                            boolean              false                                     show view in watch mode<br>  --root-list          --root-list value1, [value2, ...]        array                                     true                 provides to resolve file in root fo…
-						--debug-brk          --debug-brk                              boolean              false                                     run program in debug mode           </p>
+					<li>Full Template: If you need to set custom readers then you can use full template.</li>
+				</ul>
+				<pre><code class="lang-json">{
+    <span class="hljs-attr">"reader"</span>: {
+        <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Array&lt;JsonFile&gt;"</span>,
+        <span class="hljs-attr">"main"</span>: Readers.Array,
+        <span class="hljs-attr">"related"</span>: Readers.JsonFile
+      },
+      <span class="hljs-attr">"defaultValue"</span>: [],
+      <span class="hljs-attr">"remove"</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-attr">"infinity"</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">"description"</span>: <span class="hljs-string">"Json Files Description"</span>,
+      <span class="hljs-attr">"usage"</span>: <span class="hljs-number">-1</span>
+}
+</code></pre>
+				<h4 id="standart-readers">Standart Readers</h4>
+				<ul>
+					<li>Boolean</li>
+					<li>String</li>
+					<li>Array (Array<String>)</li>
+					<li>TextFile</li>
+					<li>JsonFile</li>
+					<li>Array<TextFile></li>
+					<li><p>Array<JsonFile></p>
+					</li>
+					<li><p>You can override standard readers when you call Helper file.</p>
 					</li>
 				</ul>
-				<hr>
-				<p>```</p>
+				<pre><code class="lang-typescript"><span class="hljs-keyword">let</span> customReaders = {
+     <span class="hljs-built_in">Boolean</span>: <span class="hljs-function">(<span class="hljs-params">state: CommandState, opts</span>) =&gt;</span> {
+         <span class="hljs-keyword">if</span> (!has(opts[state.name]) &amp;&amp; state.args.length &gt; state.i) {
+             <span class="hljs-keyword">let</span> def = state.template.defaultValue;
+             opts[state.name] = has(def) ? !def : <span class="hljs-literal">true</span>;
+             <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+         }
+         <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+     },
+     NewType: <span class="hljs-function">(<span class="hljs-params">state: CommandState, opts</span>) =&gt;</span> {
+         <span class="hljs-keyword">if</span> (!has(opts[state.name]) &amp;&amp; state.args.length &gt; state.i) {
+             <span class="hljs-keyword">let</span> def = state.template.defaultValue;
+             opts[state.name] = has(def) ? !def : <span class="hljs-literal">true</span>;
+             <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+         }
+         <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+     } 
+}
+
+<span class="hljs-keyword">let</span> helper = <span class="hljs-keyword">new</span> Helper(template, customerReaders)
+</code></pre>
+				<h4 id="examples">Examples</h4>
+				<ul>
+					<li>Json Template Example</li>
+				</ul>
+				<pre><code class="lang-typescript"><span class="hljs-keyword">let</span> templateJson = {
+  <span class="hljs-string">"name"</span>: <span class="hljs-string">"command-helper"</span>,
+  <span class="hljs-string">"version"</span>: <span class="hljs-string">"1.0.0"</span>,
+  <span class="hljs-string">"commands"</span>: {
+    <span class="hljs-string">"--renderer"</span>: <span class="hljs-string">"renderer"</span>,
+    <span class="hljs-string">"--interactive"</span>: <span class="hljs-string">"interactive"</span>,
+    <span class="hljs-string">"--base-url"</span>: <span class="hljs-string">"baseUrl"</span>,
+    <span class="hljs-string">"--root-list"</span>: <span class="hljs-string">"rootList"</span>,
+    <span class="hljs-string">"--opts"</span>: <span class="hljs-string">"opts"</span>,
+    <span class="hljs-string">"--tdd-json"</span>: <span class="hljs-string">"tddJson"</span>,
+    <span class="hljs-string">"--files"</span>: <span class="hljs-string">"files"</span>,
+    <span class="hljs-string">"--another-files"</span>: <span class="hljs-string">"anotherFiles"</span>,
+    <span class="hljs-string">"--json-files"</span>: <span class="hljs-string">"jsonFiles"</span>
+  },
+  <span class="hljs-string">"options"</span>: {
+    <span class="hljs-string">"renderer"</span>: {
+      <span class="hljs-string">"reader"</span>: <span class="hljs-string">"Boolean"</span>,
+      <span class="hljs-string">"defaultValue"</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-string">"description"</span>: <span class="hljs-string">"Renderer Description"</span>,
+      <span class="hljs-string">"usage"</span>: <span class="hljs-number">0</span>
+    },
+    <span class="hljs-string">"interactive"</span>: {
+      <span class="hljs-string">"reader"</span>: <span class="hljs-string">"Boolean"</span>,
+      <span class="hljs-string">"defaultValue"</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-string">"description"</span>: <span class="hljs-string">"Interactive Description"</span>,
+      <span class="hljs-string">"usage"</span>: <span class="hljs-number">0</span>
+    },
+    <span class="hljs-string">"baseUrl"</span>: {
+      <span class="hljs-string">"reader"</span>: <span class="hljs-string">"String"</span>,
+      <span class="hljs-string">"defaultValue"</span>: <span class="hljs-string">""</span>,
+      <span class="hljs-string">"description"</span>: <span class="hljs-string">"Base Url Description"</span>,
+      <span class="hljs-string">"usage"</span>: <span class="hljs-number">1</span>
+    },
+    <span class="hljs-string">"rootList"</span>: {
+      <span class="hljs-string">"reader"</span>: <span class="hljs-string">"Array"</span>,
+      <span class="hljs-string">"defaultValue"</span>: [],
+      <span class="hljs-string">"description"</span>: <span class="hljs-string">"Root List Description"</span>,
+      <span class="hljs-string">"usage"</span>: <span class="hljs-number">-1</span>
+    },
+    <span class="hljs-string">"opts"</span>: {
+      <span class="hljs-string">"reader"</span>: <span class="hljs-string">"TextFile"</span>,
+      <span class="hljs-string">"defaultValue"</span>: <span class="hljs-string">""</span>,
+      <span class="hljs-string">"description"</span>: <span class="hljs-string">"Opts Description"</span>,
+      <span class="hljs-string">"usage"</span>: <span class="hljs-number">1</span>
+    },
+    <span class="hljs-string">"tddJson"</span>: {
+      <span class="hljs-string">"reader"</span>: <span class="hljs-string">"JsonFile"</span>,
+      <span class="hljs-string">"defaultValue"</span>: {},
+      <span class="hljs-string">"description"</span>: <span class="hljs-string">"Tdd Json Description"</span>,
+      <span class="hljs-string">"usage"</span>: <span class="hljs-number">1</span>
+    },
+    <span class="hljs-string">"files"</span>: {
+      <span class="hljs-string">"reader"</span>: <span class="hljs-string">"Array&lt;TextFile&gt;"</span>,
+      <span class="hljs-string">"defaultValue"</span>: [],
+      <span class="hljs-string">"description"</span>: <span class="hljs-string">"Files Description"</span>,
+      <span class="hljs-string">"usage"</span>: <span class="hljs-number">-1</span>
+    },
+    <span class="hljs-string">"jsonFiles"</span>: {
+      <span class="hljs-string">"reader"</span>: <span class="hljs-string">"Array&lt;JsonFile&gt;"</span>,
+      <span class="hljs-string">"defaultValue"</span>: [],
+      <span class="hljs-string">"description"</span>: <span class="hljs-string">"Json Files Description"</span>,
+      <span class="hljs-string">"usage"</span>: <span class="hljs-number">-1</span>
+    }
+  }
+}
+<span class="hljs-keyword">let</span> helper = <span class="hljs-keyword">new</span> Helper(template);
+<span class="hljs-keyword">let</span> result = helper.parse(process.argv);
+</code></pre>
+				<h4 id="contribute">Contribute</h4>
+				<ul>
+					<li>Install </li>
+				</ul>
+				<pre><code class="lang-ssh">$ git clone https://github.com/wasabi-io/command-helper.git`
+$ cd command-helper
+$ npm install
+</code></pre>
+				<ul>
+					<li>Test</li>
+				</ul>
+				<pre><code class="lang-npm">$ npm test
+</code></pre>
+				<ul>
+					<li>Coverage</li>
+				</ul>
+				<pre><code class="lang-npm">$ npm run coverage
+</code></pre>
+				<ul>
+					<li>Export Docs</li>
+				</ul>
+				<pre><code class="lang-npm">$ npm run docs
+</code></pre>
+				<ul>
+					<li>Build Code as javascript (common-js)</li>
+				</ul>
+				<pre><code class="lang-npm">$ npm build
+</code></pre>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -280,28 +285,25 @@ helper.parse([<span class="hljs-string">'--renderer'</span>, <span class="hljs-s
 						<a href="globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_app_helper_.html">"app/<wbr>Helper"</a>
+						<a href="modules/_api_.html">"<wbr>Api"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_app_helperapi_.html">"app/<wbr>Helper<wbr>Api"</a>
+						<a href="modules/_api_helper_.html">"api/<wbr>Helper"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_app_helperboard_.html">"app/<wbr>Helper<wbr>Board"</a>
+						<a href="modules/_api_readers_.html">"api/<wbr>Readers"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_app_standardreaders_.html">"app/<wbr>Standard<wbr>Readers"</a>
+						<a href="modules/_api_template_.html">"api/<wbr>Template"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_app_index_.html">"app/index"</a>
+						<a href="modules/_help_helperboard_.html">"help/<wbr>Helper<wbr>Board"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_index_.html">"index"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_util_finder_.html">"util/<wbr>Finder"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_util_index_.html">"util/index"</a>
+						<a href="modules/_util_readerutil_.html">"util/<wbr>Reader<wbr>Util"</a>
 					</li>
 				</ul>
 			</nav>

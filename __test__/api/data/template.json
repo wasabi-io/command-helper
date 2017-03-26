@@ -1,0 +1,65 @@
+{
+  "name": "command-helper",
+  "version": "1.0.0",
+  "commands": {
+    "--renderer": "renderer",
+    "--interactive": "interactive",
+    "--base-url": "baseUrl",
+    "--root-list": "rootList",
+    "--opts": "opts",
+    "--tdd-json": "tddJson",
+    "--files": "files",
+    "--another-files": "anotherFiles",
+    "--json-files": "jsonFiles"
+  },
+  "options": {
+    "renderer": {
+      "reader": "Boolean",
+      "defaultValue": false,
+      "description": "Renderer Description",
+      "usage": 0
+    },
+    "interactive": {
+      "reader": "Boolean",
+      "defaultValue": false,
+      "description": "Interactive Description",
+      "usage": 0
+    },
+    "baseUrl": {
+      "reader": "String",
+      "defaultValue": "",
+      "description": "Base Url Description",
+      "usage": 1
+    },
+    "rootList": {
+      "reader": "Array",
+      "defaultValue": [],
+      "description": "Root List Description",
+      "usage": -1
+    },
+    "opts": {
+      "reader": "TextFile",
+      "defaultValue": "",
+      "description": "Opts Description",
+      "usage": 1
+    },
+    "tddJson": {
+      "reader": "JsonFile",
+      "defaultValue": {},
+      "description": "Tdd Json Description",
+      "usage": 1
+    },
+    "files": {
+      "reader": "Array<TextFile>",
+      "defaultValue": [],
+      "description": "Files Description",
+      "usage": -1
+    },
+    "jsonFiles": {
+      "reader": "Array<JsonFile>",
+      "defaultValue": [],
+      "description": "Json Files Description",
+      "usage": -1
+    }
+  }
+}

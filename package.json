@@ -1,39 +1,38 @@
 {
   "name": "command-helper",
-  "version": "1.0.3",
-  "description": "Command Helpers",
+  "version": "1.0.4",
+  "description": "lib/index.js",
   "main": "lib/index.js",
   "typings": "lib/index",
   "scripts": {
-    "start": "ts-node tools/dev/start.ts",
     "test": "nyc --reporter=html --reporter=text --reporter=lcov mocha --opts mocha.opts",
-    "coverage": "nyc report --reporter=lcov --reporter=text-lcov | coveralls",
-    "build": "rimraf ./lib && tsc -p tsconfig.json",
-    "docs": "rimraf ./docs && typedoc --module commonjs --target ES5 --name Wasabi-Common --readme ./README.md  --exclude **/*.spec.ts --out ./docs ./src && node node_modules/shx/lib/cli.js touch ./docs/.nojekyll"
+    "coverage": "nyc report --reporter=lcov",
+    "build": "rimraf ./lib && tsc",
+    "docs": "rimraf ./docs && typedoc --module commonjs --target ES5 --name command-helper --readme ./README.md  --exclude **/*.spec.ts --out ./docs ./src && node node_modules/shx/lib/cli.js touch ./docs/.nojekyll"
   },
   "author": "kamilbukum@gmail.com",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/kbukum/command-helper.git"
-  },
   "license": "MIT",
   "devDependencies": {
-    "@types/chai": "^3.4.35",
-    "@types/mocha": "^2.2.40",
+    "@types/chai": "3.4.35",
+    "@types/lodash": "4.14.55",
+    "@types/mocha": "2.2.40",
     "@types/node": "^7.0.8",
-    "chai": "^3.5.0",
-    "coveralls": "^2.12.0",
-    "mocha": "^3.2.0",
-    "nyc": "^10.1.2",
-    "rimraf": "^2.6.1",
-    "shx": "^0.2.2",
+    "chai": "3.5.0",
+    "mocha": "3.2.0",
+    "nyc": "10.1.2",
+    "rimraf": "2.6.1",
+    "shx": "0.2.2",
     "ts-node": "^2.1.0",
-    "typedoc": "^0.5.7",
-    "typescript": "^2.2.1"
+    "typedoc": "0.5.7",
+    "typescript": "2.2.1"
   },
   "dependencies": {
     "cli-table": "^0.3.1",
     "wasabi-common": "^1.0.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wasabi-io/command-helper.git"
   },
   "nyc": {
     "reporter": [

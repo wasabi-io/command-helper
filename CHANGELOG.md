@@ -1,6 +1,7 @@
 ## CHANGELOG
 
-#### v1.0.4 Developing...
+#### v1.0.4
+* changed base of project.
 
 #### v1.0.3
 * added mocha, nyc configurations to test.

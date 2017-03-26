@@ -4,207 +4,221 @@
 [![Build Status](https://travis-ci.org/kbukum/command-helper.svg?branch=master)](https://travis-ci.org/kbukum/command-helper)
 [![codecov](https://codecov.io/gh/kbukum/command-helper/branch/master/graph/badge.svg)](https://codecov.io/gh/kbukum/command-helper)
 
-### Motivation
+#### Motivation
 
 * Command Helper is used to get result from the given commands and provides to remove current command from the given command array if needed.
 * You can use standart readers (boolean, string, array ) to read command and also you can define custom readers to read commands.
 
+#### [Type Docs](https://wasabi-io.github.io/command-helper)
+
 #### Template Format
-* <a name="CommandHelperProps"></a>CommandHelperProps
-    - start? {number} : read command by start index from the given command array
-    - template?: [CommandHelperTemplate](#CommandHelperTemplate),
-    - readers?: [CommandReaders](#CommandReaders) 
 
-```typescript
-export interface CommandHelperProps {
-    start?: number, // define command start index
-    template?: CommandHelperTemplate,  // command template
-    readers?: CommandReaders // command readers
+#### <a name="Main Template"></a>Main Template
+* name : name of your bin js file.
+* version: version of your library.
+* commands: command reference to find your command template.
+* options: holds each command template options.
+
+```json
+{
+  "name": "command-helper",
+  "version": "1.0.0",
+  "commands": {
+    ...
+  },
+  "options": {
+    ...
+  }
+}
+
+```
+
+#### <a name="Command Template"></a>Command Template
+
+* Main Template -> options[key]: Define command template in ${Main Template}.options{variable name}
+    - reader: Reader is read command and find value of command in the given arguments.
+        - name: Its shown on help board.
+        - main: it is reader function to read the command and find its values. 
+        - related: called by main reader if exist. 
+    - defaultValue: it is default value for the command.
+    - remove: Indicates if the command read in the given arguments then remove all things about the command from the given arguments.
+    - infinity: read command recursively from the given arguments.
+    - description: Its shown on help board.
+    - usage:  Its used on help board.
+        - usage = 0 then --command
+        - usage = 1 then --command value
+        - usage = -1 then --files value1, [value2, ...]
+        - else shows usage if exist.
+
+- Short Template: It used when the template file keeps as json. 
+
+```json
+{
+    "reader": "Boolean",
+    "defaultValue": false,
+    "description": "Renderer Description",
+    "usage": 0
 }
 ```
 
-* <a name="CommandReaders"></a>Command Readers : Holds readers to read commands by the command type.
-    - key {string} : [CommandReader](#CommandReader)
-    
-```typescript
-export interface CommandReaders {
-    [key: string]: CommandReader
-}
-```
+- Full Template: If you need to set custom readers then you can use full template.
 
-* <a name="CommandReader"></a>Command Reader: Provides to read command. 
-    - (name {string}, state {[CommandState](#CommandState)} , options {key {string}: any}) => {any}
-
-```typescript
-export interface CommandReader {
-    (name: string, state: CommandState, options: {[key: string]: any}): any
-}
-```
-
-* <a name="CommandHelperTemplate"></a>Command Helper Template 
-    - name: string,
-    - version: string,
-    - options {key {string}: alias or [CommandTemplate](#CommandTemplate) }
-
-```typescript
-export interface CommandHelperTemplate {
-    name: string,
-    version: string,
-    options : {
-        [key: string]: any
-    }
-}
-```
-
-* <a name="CommandTemplate"></a>Command Template 
-    - type: string
-    - default?: string
-    - remove?: boolean
-    - infinity?: boolean
-
-```typescript
-// Command Template
-export interface CommandTemplate {
-    type: string
-    default?: string
-    remove?: boolean
-    infinity?: boolean
-}
-```
-
-* <a name="CommandState"></a>Command State 
-    - command: string,
-    - template: CommandTemplate,
-    - argv: string[],
-    - lastIndex: number,
-    - part2: string
-
-```typescript
-export interface CommandState {
-    command: string,
-    template: CommandTemplate,
-    argv: string[],
-    lastIndex: number,
-    part2: string
-}
-```
-
-* <a name="ParseResult"></a>Parse Result
-    - options: { key {string}: value {any} }
-    - rawArgs: string[]
-    - otherArgs: string[]
-    - defaults: { key {string}: {boolean} }
-
-```typescript
-export interface ParseResult {
-    options: {
-        [key: string]: any
-    }
-    rawArgs: string[]
-    otherArgs: string[]
-    defaults: {
-        [key: string]: boolean
-    }
-}
-```
-
-
-* Flags: 
-    - type
-    - default
-    - infinity
-    - description
-    - remove 
-    
-* Standart Readers
-    - boolean
-    - string
-    - array
-
-* Add Custom Reader
-
-* Use callback to parse command
-
-
-
-#### Example Template
-
-* Template Parameter
-```typescript
-let template = {
-  name: "application",
-  version: "v1.0",
-  options: {
-    "--renderer": {
-      "type": "boolean",
-      "usage": 0,
-      "default": false,
-      "description": "show view on ui"
-    },
-    "--interactive": {
-      "type": "boolean",
-      "usage": 0,
-      "default": false,
-      "description": "show view in watch mode"
-    },
-    "--root-list": {
-      "type": "array",
-      "default": [],
-      "usage": -1,
-      "infinity": true,
-      "description": "provides to resolve file in root folders"
-    },
-    "--debug-brk": {
-      "type": "boolean",
-      "default": false,
-      "usage": 0,
+```json
+{
+    "reader": {
+        "name": "Array<JsonFile>",
+        "main": Readers.Array,
+        "related": Readers.JsonFile
+      },
+      "defaultValue": [],
       "remove": true,
-      "description": "run program in debug mode"
+      "infinity": false,
+      "description": "Json Files Description",
+      "usage": -1
+}
+```
+
+#### Standart Readers 
+
+* Boolean
+* String
+* Array (Array<String>)
+* TextFile
+* JsonFile
+* Array<TextFile>
+* Array<JsonFile>
+
+* You can override standard readers when you call Helper file.
+
+
+```typescript
+let customReaders = {
+     Boolean: (state: CommandState, opts) => {
+         if (!has(opts[state.name]) && state.args.length > state.i) {
+             let def = state.template.defaultValue;
+             opts[state.name] = has(def) ? !def : true;
+             return true;
+         }
+         return false;
+     },
+     NewType: (state: CommandState, opts) => {
+         if (!has(opts[state.name]) && state.args.length > state.i) {
+             let def = state.template.defaultValue;
+             opts[state.name] = has(def) ? !def : true;
+             return true;
+         }
+         return false;
+     } 
+}
+
+let helper = new Helper(template, customerReaders)
+
+```
+#### Examples 
+
+* Json Template Example
+
+```typescript
+let templateJson = {
+  "name": "command-helper",
+  "version": "1.0.0",
+  "commands": {
+    "--renderer": "renderer",
+    "--interactive": "interactive",
+    "--base-url": "baseUrl",
+    "--root-list": "rootList",
+    "--opts": "opts",
+    "--tdd-json": "tddJson",
+    "--files": "files",
+    "--another-files": "anotherFiles",
+    "--json-files": "jsonFiles"
+  },
+  "options": {
+    "renderer": {
+      "reader": "Boolean",
+      "defaultValue": false,
+      "description": "Renderer Description",
+      "usage": 0
+    },
+    "interactive": {
+      "reader": "Boolean",
+      "defaultValue": false,
+      "description": "Interactive Description",
+      "usage": 0
+    },
+    "baseUrl": {
+      "reader": "String",
+      "defaultValue": "",
+      "description": "Base Url Description",
+      "usage": 1
+    },
+    "rootList": {
+      "reader": "Array",
+      "defaultValue": [],
+      "description": "Root List Description",
+      "usage": -1
+    },
+    "opts": {
+      "reader": "TextFile",
+      "defaultValue": "",
+      "description": "Opts Description",
+      "usage": 1
+    },
+    "tddJson": {
+      "reader": "JsonFile",
+      "defaultValue": {},
+      "description": "Tdd Json Description",
+      "usage": 1
+    },
+    "files": {
+      "reader": "Array<TextFile>",
+      "defaultValue": [],
+      "description": "Files Description",
+      "usage": -1
+    },
+    "jsonFiles": {
+      "reader": "Array<JsonFile>",
+      "defaultValue": [],
+      "description": "Json Files Description",
+      "usage": -1
     }
   }
-};
-
-let helper = new CommandHelper(template);
-```
-
-* Given Array
-```javascript
-helper.parse(['--renderer', '--another_command', '--debug-brk'])
-```
-
-* parse result
-```javascript
-{
-    options: {
-        renderer: true,
-        debugBrk: true,
-        interactive: false,
-        rootList: []
-    },
-    rawArgs: ['--renderer', '--another_command', '--debug-brk'],
-    otherArgs: ['--another_command'],
-    defaults: {interactive: true, rootList: true}
 }
+let helper = new Helper(template);
+let result = helper.parse(process.argv);
 ```
 
-* Help Example
+#### Contribute
 
-```javascript
-helper.parse(['--help'])
+* Install 
+
+```ssh
+$ git clone https://github.com/wasabi-io/command-helper.git`
+$ cd command-helper
+$ npm install
 ```
 
-* Help Result
+* Test
+
+```npm
+$ npm test
 ```
- Usage: command-helper [options]
 
- Options: 
+* Coverage
 
-    Command              Usage                                    Type                 Default              Infinity             Description                         
-==================================================================================================================================================================
-    --renderer           --renderer                               boolean              false                                     show view on ui                     
-    --interactive        --interactive                            boolean              false                                     show view in watch mode             
-    --root-list          --root-list value1, [value2, ...]        array                                     true                 provides to resolve file in root fo…
-    --debug-brk          --debug-brk                              boolean              false                                     run program in debug mode           
-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+```npm
+$ npm run coverage
+```
 
+
+* Export Docs
+
+```npm
+$ npm run docs
+```
+
+* Build Code as javascript (common-js)
+
+```npm
+$ npm build
 ```
