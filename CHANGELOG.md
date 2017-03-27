@@ -1,5 +1,8 @@
 ## CHANGELOG
 
+#### v1.0.5
+* upgraded version on npm.
+
 #### v1.0.4
 * changed base of project.
 
