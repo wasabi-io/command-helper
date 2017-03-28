@@ -1,6 +1,12 @@
 ## CHANGELOG
 
-#### v1.0.7 Developing...
+#### v1.0.9 Developing...
+
+#### v1.0.8 
+* removed unused folders from the .npmignore
+
+#### v1.0.7
+* upgraded version on npm.
 
 #### v1.0.6
 * upgraded version on npm.

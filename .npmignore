@@ -12,3 +12,6 @@
 /docs
 /.idea
 /book
+/.travis.yml
+/mocha.opts
+/tsconfig.json
