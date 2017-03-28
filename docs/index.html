@@ -155,7 +155,8 @@
 					<li><p>You can override standard readers when you call Helper file.</p>
 					</li>
 				</ul>
-				<pre><code class="lang-typescript"><span class="hljs-keyword">let</span> customReaders = {
+				<pre><code class="lang-typescript"><span class="hljs-keyword">import</span> {  } <span class="hljs-string">"api/Api"</span>;
+<span class="hljs-keyword">let</span> customReaders = {
      <span class="hljs-built_in">Boolean</span>: <span class="hljs-function">(<span class="hljs-params">state: CommandState, opts</span>) =&gt;</span> {
          <span class="hljs-keyword">if</span> (!has(opts[state.name]) &amp;&amp; state.args.length &gt; state.i) {
              <span class="hljs-keyword">let</span> def = state.template.defaultValue;

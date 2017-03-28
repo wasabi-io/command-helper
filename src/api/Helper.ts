@@ -16,6 +16,7 @@ export default class Helper extends Class {
     private props: TemplateProps;
     public constructor(props: TemplateProps, readers?: {[key: string]: Reader}) {
         super();
+
         props.readers = Objects.mergeDefaults(Readers, readers) as any;
         this.props = Template.fixTemplate(props);
     }

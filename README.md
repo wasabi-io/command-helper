@@ -92,6 +92,7 @@
 
 
 ```typescript
+import {  } "api/Api";
 let customReaders = {
      Boolean: (state: CommandState, opts) => {
          if (!has(opts[state.name]) && state.args.length > state.i) {

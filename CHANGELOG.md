@@ -1,5 +1,10 @@
 ## CHANGELOG
 
+#### v1.0.7 Developing...
+
+#### v1.0.6
+* upgraded version on npm.
+
 #### v1.0.5
 * upgraded version on npm.
 

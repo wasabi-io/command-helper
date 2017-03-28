@@ -9,3 +9,6 @@
 /.coveralls.yml
 /yarn.lock
 /.nyc_output
+/docs
+/.idea
+/book
