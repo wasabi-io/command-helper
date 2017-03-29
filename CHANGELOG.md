@@ -1,6 +1,11 @@
 ## CHANGELOG
 
-#### v1.0.9 Developing...
+#### v1.0.10 Developing...
+
+#### v1.0.9
+* added equals feature to the String, JsonFile, TextFile commands. 
+if ["--command", "value"] is same ["--command=value"] 
+* added examples of Readers to the README.md file.
 
 #### v1.0.8 
 * removed unused folders from the .npmignore

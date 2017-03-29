@@ -48,12 +48,12 @@ export default class Helper extends Class {
             let isCommand = false;
             let arg = args[i];
             try {
+                commandState.equalPart = null;
                 commandState.command = arg;
                 if (!Strings.startsWith(commandState.command, "-")) continue;
-                let equalPart;
                 let equalIndexOf = commandState.command.indexOf("=");
                 if (equalIndexOf != -1) {
-                    equalPart = commandState.command.substring(equalIndexOf + 1);
+                    commandState.equalPart = commandState.command.substring(equalIndexOf + 1);
                     commandState.command = commandState.command.substring(0, equalIndexOf);
                 }
 

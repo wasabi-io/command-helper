@@ -15,6 +15,9 @@ export default class ReaderUtil {
      * @return {string}
      */
     public static getOne(state: CommandState) {
+        if(has(state.equalPart)) {
+            return state.equalPart;
+        }
         let nextIndex = state.i + 1;
         if(state.args.length > nextIndex) {
             let value = state.args[nextIndex];

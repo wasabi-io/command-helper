@@ -1,6 +1,6 @@
 {
   "name": "command-helper",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "lib/index.js",
   "main": "lib/index.js",
   "typings": "lib/index",

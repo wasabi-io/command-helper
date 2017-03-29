@@ -144,13 +144,13 @@
 </code></pre>
 				<h4 id="standart-readers">Standart Readers</h4>
 				<ul>
-					<li>Boolean</li>
-					<li>String</li>
-					<li>Array (Array<String>)</li>
-					<li>TextFile</li>
-					<li>JsonFile</li>
-					<li>Array<TextFile></li>
-					<li><p>Array<JsonFile></p>
+					<li>Boolean <code>[...,&quot;--command&quot;,....]</code></li>
+					<li>String -&gt; <code>[...,&quot;--command&quot;, &quot;value&quot;,....]</code> or <code>[...,&quot;--command=value&quot;,....]</code></li>
+					<li>Array (Array<String>) [&quot;--command&quot;, &quot;value1&quot;, &quot;value2&quot;, &quot;value3&quot;]</li>
+					<li>TextFile -&gt; <code>[...,&quot;--command&quot;, &quot;path&quot;,....]</code> or <code>[...,&quot;--command=path&quot;,....]</code></li>
+					<li>JsonFile -&gt; <code>[...,&quot;--command&quot;, &quot;path&quot;,....]</code> or <code>[...,&quot;--command=path&quot;,....]</code></li>
+					<li>Array<TextFile> <code>[...,&quot;--command&quot;, &quot;path1&quot;, &quot;path2&quot;, &quot;path3&quot;,....]</code></li>
+					<li><p>Array<JsonFile> <code>[...,&quot;--command&quot;, &quot;path1&quot;, &quot;path2&quot;, &quot;path3&quot;,....]</code></p>
 					</li>
 					<li><p>You can override standard readers when you call Helper file.</p>
 					</li>

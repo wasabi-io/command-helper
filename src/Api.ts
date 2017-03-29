@@ -19,7 +19,8 @@ export interface CommandState {
     name: string,
     template: CommandTemplate,
     i: number,
-    args: string[]
+    args: string[],
+    equalPart?: string
 }
 
 export interface ResultOption {

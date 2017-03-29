@@ -52,7 +52,7 @@ const TextFile = (state: CommandState, opts) => {
     let fileData = fs.readFileSync(resolve(process.cwd(), opts[state.name]), "UTF-8");
     opts[state.name] = fileData;
     return true;
-}
+};
 
 /**
  * Reads JsonFile String commands from the given arguments.
@@ -68,7 +68,7 @@ const JsonFile = (state: CommandState, opts) => {
         return true;
     }
     return false;
-}
+};
 
 /**
  * Reads Array<String> commands from the given arguments.

@@ -80,13 +80,13 @@
 
 #### Standart Readers 
 
-* Boolean
-* String
-* Array (Array<String>)
-* TextFile
-* JsonFile
-* Array<TextFile>
-* Array<JsonFile>
+* Boolean `[...,"--command",....]`
+* String -> `[...,"--command", "value",....]` or `[...,"--command=value",....]`
+* Array (Array<String>) ["--command", "value1", "value2", "value3"]
+* TextFile -> `[...,"--command", "path",....]` or `[...,"--command=path",....]`
+* JsonFile -> `[...,"--command", "path",....]` or `[...,"--command=path",....]`
+* Array<TextFile> `[...,"--command", "path1", "path2", "path3",....]`
+* Array<JsonFile> `[...,"--command", "path1", "path2", "path3",....]`
 
 * You can override standard readers when you call Helper file.
 
