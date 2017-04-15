@@ -1,6 +1,10 @@
 ## CHANGELOG
 
-#### v1.0.10 Developing...
+#### v1.0.11 Developing...
+
+#### v1.0.10
+
+* upgrade version of **wasabi-common** library.
 
 #### v1.0.9
 * added equals feature to the String, JsonFile, TextFile commands. 

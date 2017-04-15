@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "typings": "lib/index",
   "scripts": {
-    "test": "nyc --reporter=html --reporter=text --reporter=lcov mocha --opts mocha.opts",
+    "test": "rimraf ./coverage && nyc --reporter=html --reporter=text --reporter=lcov mocha --opts mocha.opts",
     "coverage": "nyc report --reporter=lcov",
     "build": "rimraf ./lib && tsc",
     "docs": "rimraf ./docs && typedoc --module commonjs --target ES5 --name command-helper --readme ./README.md  --exclude **/*.spec.ts --out ./docs ./src && node node_modules/shx/lib/cli.js touch ./docs/.nojekyll"
@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "cli-table": "0.3.1",
-    "wasabi-common": "1.0.6"
+    "wasabi-common": "1.0.9"
   },
   "repository": {
     "type": "git",
