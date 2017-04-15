@@ -4,6 +4,7 @@ import {CommandTemplate, Reader} from "../Api";
 export interface TemplateProps {
     name: string,
     version: string,
+    addDefaults?: boolean,
     readers?: {
       [key: string]: Reader
     },

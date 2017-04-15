@@ -6,18 +6,22 @@ import * as Readers from "./Readers";
 import Objects from "wasabi-common/lib/types/Objects";
 import Arrays from "wasabi-common/lib/types/Arrays";
 import HelperBoard from "../help/HelperBoard";
+import PropsClass from "wasabi-common/lib/lang/PropClass";
 
 /**
  * Provides to parse arguments by the given template.
  * @export
  * @default Helper
  */
-export default class Helper extends Class {
-    private props: TemplateProps;
+export default class Helper extends PropsClass {
+    props: TemplateProps;
+    private static defaultProps = {
+        addDefaults: true,
+        readers: Readers
+    }
     public constructor(props: TemplateProps, readers?: {[key: string]: Reader}) {
-        super();
-
-        props.readers = Objects.mergeDefaults(Readers, readers) as any;
+        super(props);
+        this.props.readers = Objects.merge(readers, this.props.readers);
         this.props = Template.fixTemplate(props);
     }
 
@@ -92,12 +96,14 @@ export default class Helper extends Class {
         }
         Arrays.removeValue(args, undefined);
 
-        Objects.forEach(props.options, (option, name) => {
-            if(!has(result.options[name]) && has(option.defaultValue)) {
-                result.options[name] = option.defaultValue;
-                result.defaults[name] = true;
-            }
-        });
+        if(props.addDefaults) {
+            Objects.forEach(props.options, (option, name) => {
+                if(!has(result.options[name]) && has(option.defaultValue)) {
+                    result.options[name] = option.defaultValue;
+                    result.defaults[name] = true;
+                }
+            });
+        }
         this.help(props, result);
         return result;
     }

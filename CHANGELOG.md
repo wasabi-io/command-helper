@@ -5,6 +5,7 @@
 #### v1.0.10
 
 * upgrade version of **wasabi-common** library.
+* added **addDefaults** flag to the template.
 
 #### v1.0.9
 * added equals feature to the String, JsonFile, TextFile commands. 

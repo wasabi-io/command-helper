@@ -3,6 +3,7 @@ import * as Readers from "api/Readers";
 module.exports = {
   "name": "command-helper",
   "version": "1.0.0",
+  "addDefaults": true,
   "commands": {
     "--renderer": "renderer",
     "--interactive": "interactive",
