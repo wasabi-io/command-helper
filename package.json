@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "cli-table": "0.3.1",
-    "wasabi-common": "1.0.9"
+    "wasabi-common": "1.0.10"
   },
   "repository": {
     "type": "git",

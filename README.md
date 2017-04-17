@@ -193,7 +193,7 @@ let result = helper.parse(process.argv);
 
 * Install 
 
-```ssh
+```bash
 $ git clone https://github.com/wasabi-io/command-helper.git`
 $ cd command-helper
 $ npm install
@@ -201,25 +201,25 @@ $ npm install
 
 * Test
 
-```npm
+```bash
 $ npm test
 ```
 
 * Coverage
 
-```npm
+```bash
 $ npm run coverage
 ```
 
 
 * Export Docs
 
-```npm
+```bash
 $ npm run docs
 ```
 
 * Build Code as javascript (common-js)
 
-```npm
+```bash
 $ npm build
 ```

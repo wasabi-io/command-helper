@@ -1,6 +1,10 @@
 ## CHANGELOG
 
-#### v1.0.11 Developing...
+#### v1.0.12 Developing...
+
+#### v1.0.11
+* upgrade version of **wasabi-common** library.
+* changed code language *npm* and *ssh* as *bash*
 
 #### v1.0.10
 
